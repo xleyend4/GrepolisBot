@@ -1,21 +1,25 @@
-# Grepolis → ChatGPT (read-only prototype)
+# Grepolis → ChatGPT (prototipo de solo lectura)
 
-This is **not an installed ChatGPT plugin**. It is a first step to export a snapshot of your own cities for analysis. No server, API key, account credentials, or paid services are needed.
+**Estado:** prototipo sin probar en una sesión real de Grepolis. No es un plugin de ChatGPT ni una conexión en tiempo real.
 
-## Use
+## Opción sencilla: Tampermonkey
+1. En Brave para Windows, abrí Tampermonkey → Crear nuevo script.
+2. Pegá el contenido completo de [grepolis-chatgpt.user.js](./grepolis-chatgpt.user.js) y guardá.
+3. Recargá Grepolis. Aparecerá abajo a la derecha **Exportar para ChatGPT**.
+4. Hacé clic: se descargará un archivo `grepolis-snapshot-AAAA-MM-DD.json`.
+5. Adjuntá ese JSON a ChatGPT y pedí un plan de edificios, tropas o recursos.
 
-1. Open Grepolis in Brave and wait for the game to finish loading.
-2. Open Developer Tools → Console (F12 or Ctrl+Shift+J).
-3. Paste the contents of `snapshot.js` and run it.
-4. Copy the JSON output (Chrome/Brave may copy automatically) and paste it into ChatGPT.
-5. Ask for a building/recruitment priority plan across your cities.
+El botón no instala ni modifica ModernBot. Podés desactivar el script en Tampermonkey cuando quieras.
 
-## What is included
-Town names and IDs, resources, storage, free population, building levels, units, and number of queued building orders, where exposed by the game's client.
+## Alternativa técnica
+El archivo [snapshot.js](./snapshot.js) puede ejecutarse manualmente desde la consola del navegador.
 
-## Limitations and safety
-- **No live ChatGPT connection yet**. This is a manual export, not continuous monitoring.
-- The game client API is unofficial; fields may change or be unavailable.
-- No build, train, trade, or other game actions are performed.
-- Do not paste passwords, session tokens, or cookies. Inspect the exported JSON before sharing.
-- Use of automation or scripts may be restricted by Grepolis rules.
+## Datos exportados
+Nombre e ID de ciudad, madera, piedra, plata, almacén, población libre, niveles de edificios, tropas y cantidad de órdenes de construcción (cuando la API del cliente expone el dato).
+
+## Seguridad y limitaciones
+- El script **no** envía datos a un servidor, ni hace solicitudes de red, ni ejecuta construcciones, reclutamientos o comercio.
+- Los datos se leen desde el cliente del juego; si Grepolis cambia su API, podrían faltar campos o fallar.
+- No exporta contraseñas, cookies ni tokens de sesión. Revisá el JSON antes de compartirlo.
+- La información es una foto del momento de exportación, no seguimiento continuo.
+- Grepolis puede restringir scripts de terceros; verificá sus reglas antes de utilizarlo.
